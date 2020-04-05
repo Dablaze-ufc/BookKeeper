@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dablaze.bookkeeper.database.Book
 import com.dablaze.bookkeeper.viewModel.BookViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,7 +23,17 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         bookViewModel = ViewModelProviders.of(this).get(BookViewModel(application)::class.java)
 
+        val bookAdapter = BooksListAdapter(this)
+        val linearLayoutManager = LinearLayoutManager(this)
+        recyclerBooks.adapter = bookAdapter
+        recyclerBooks.layoutManager = linearLayoutManager
 
+        bookViewModel.allBooks.observe(this, Observer{books ->
+            books?.let {
+                bookAdapter.setBooks(books)
+            }
+
+        })
         fab.setOnClickListener {
           val intent = Intent(this, NewBookActivity::class.java)
             startActivityForResult(intent, NEW_NOTE_ACTIVITY_REQUEST_CODE)

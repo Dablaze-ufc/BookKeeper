@@ -3,16 +3,19 @@ package com.dablaze.bookkeeper.viewModel
 import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import com.dablaze.bookkeeper.database.Book
 import com.dablaze.bookkeeper.database.BookDAO
 import com.dablaze.bookkeeper.database.BookDataBase
 
 
 class BookViewModel(application: Application) : AndroidViewModel(application) {
+    val allBooks: LiveData<List<Book>>
     private var bookDao:BookDAO
     init {
         val bookDb = BookDataBase.getDataBase(application)
         bookDao = bookDb?.bookDAO()!!
+        allBooks = bookDao.allBooks
     }
 
     fun insert(book: Book){
