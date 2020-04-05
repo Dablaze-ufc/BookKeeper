@@ -1,6 +1,8 @@
 package com.dablaze.bookkeeper
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +25,7 @@ class BooksListAdapter(private val context:Context) : RecyclerView.Adapter<Books
     override fun onBindViewHolder(holder: BooksListViewHolder, position: Int) {
        var book = booksList[position]
         holder.setData(book.author,book.bookName,position)
+        holder.setListeners()
     }
 
     fun setBooks(books: List<Book>) {
@@ -39,5 +42,21 @@ class BooksListAdapter(private val context:Context) : RecyclerView.Adapter<Books
            this.pos = position
        }
 
-   }
+        fun setListeners() {
+            itemView.deleteButton.setOnClickListener {
+
+
+            }
+
+            itemView.editButton.setOnClickListener{
+                val intent = Intent(context, EditActivity::class.java)
+                intent.putExtra("id",booksList[pos].id)
+                intent.putExtra("author_name",booksList[pos].author)
+                intent.putExtra("book_name",booksList[pos].bookName)
+                (context as Activity).startActivityForResult(intent,MainActivity.UPDATE_NOTE_ACTIVITY_REQUEST_CODE)
+            }
+
+        }
+
+    }
 }

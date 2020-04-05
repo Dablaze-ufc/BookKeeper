@@ -13,7 +13,11 @@ class NewBookActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_book)
 
-        button_save.setOnClickListener {
+        buttonCancel.setOnClickListener {
+            finish()
+        }
+
+        buttonSave.setOnClickListener {
             val resultIntent = Intent()
             val author = etAuthor.editText?.text.toString().trim()
             val bookName = etBookName.editText?.text.toString().trim()

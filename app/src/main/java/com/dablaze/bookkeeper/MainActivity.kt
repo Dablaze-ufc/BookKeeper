@@ -53,10 +53,24 @@ class MainActivity : AppCompatActivity() {
                 bookViewModel.insert(book)
 
                 Toast.makeText(applicationContext,R.string.saved,Toast.LENGTH_LONG).show()
-            }else{
+            } else{
                 Toast.makeText(applicationContext,"Empty data",Toast.LENGTH_LONG).show()
             }
 
+        }else if(requestCode == UPDATE_NOTE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            if (data != null){
+                val bundle = data.extras
+                val id = bundle?.getString(EditActivity.ID)!!
+                val authorName = bundle.getString(EditActivity.UPDATED_AUTHOR)!!
+                val bookName = bundle.getString(EditActivity.UPDATED_BOOK_NAME)!!
+                val book = Book(id,authorName,bookName)
+
+                bookViewModel.update(book)
+
+                Toast.makeText(applicationContext,"Updated",Toast.LENGTH_LONG).show()
+            } else{
+                Toast.makeText(applicationContext,"Not saved",Toast.LENGTH_LONG).show()
+            }
         }else{
             Toast.makeText(applicationContext,R.string.not_saved,Toast.LENGTH_LONG).show()
         }
@@ -66,6 +80,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object{
         const val NEW_NOTE_ACTIVITY_REQUEST_CODE = 1
+        const val UPDATE_NOTE_ACTIVITY_REQUEST_CODE = 2
     }
 
 }
