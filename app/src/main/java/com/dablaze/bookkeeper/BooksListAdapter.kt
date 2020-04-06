@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dablaze.bookkeeper.database.Book
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class BooksListAdapter(private val context:Context) : RecyclerView.Adapter<BooksListAdapter.BooksListViewHolder>()  {
+class BooksListAdapter(private val context:Context, private val onDeleteClickListener: OnDeleteClickListener) : RecyclerView.Adapter<BooksListAdapter.BooksListViewHolder>()  {
+    interface OnDeleteClickListener{
+        fun onDeleteClickListener(book:Book)
+    }
 
-    private var booksList:List<Book> = mutableListOf<Book>()
+    private var booksList:List<Book> = mutableListOf()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BooksListViewHolder {
@@ -44,7 +47,7 @@ class BooksListAdapter(private val context:Context) : RecyclerView.Adapter<Books
 
         fun setListeners() {
             itemView.deleteButton.setOnClickListener {
-
+                onDeleteClickListener.onDeleteClickListener(booksList[pos])
 
             }
 

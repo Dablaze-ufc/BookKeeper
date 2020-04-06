@@ -1,10 +1,15 @@
 package com.dablaze.bookkeeper
 
 import android.app.Activity
+import android.app.SearchManager
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +18,7 @@ import com.dablaze.bookkeeper.viewModel.BookViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BooksListAdapter.OnDeleteClickListener {
 
     private lateinit var bookViewModel:BookViewModel
 
@@ -23,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         bookViewModel = ViewModelProviders.of(this).get(BookViewModel(application)::class.java)
 
-        val bookAdapter = BooksListAdapter(this)
+        val bookAdapter = BooksListAdapter(this, this)
         val linearLayoutManager = LinearLayoutManager(this)
         recyclerBooks.adapter = bookAdapter
         recyclerBooks.layoutManager = linearLayoutManager
@@ -81,6 +86,25 @@ class MainActivity : AppCompatActivity() {
     companion object{
         const val NEW_NOTE_ACTIVITY_REQUEST_CODE = 1
         const val UPDATE_NOTE_ACTIVITY_REQUEST_CODE = 2
+    }
+
+    override fun onDeleteClickListener(book: Book) {
+       bookViewModel.delete(book)
+        Toast.makeText(applicationContext,getString(R.string.delete),Toast.LENGTH_LONG).show()
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+         inflater.inflate(R.menu.menu_main,menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
+
+        val componentName = ComponentName(this,SearchActivity::class.java)
+        val searchInfo = searchManager.getSearchableInfo(componentName)
+        searchView.setSearchableInfo(searchInfo)
+        return true
     }
 
 }

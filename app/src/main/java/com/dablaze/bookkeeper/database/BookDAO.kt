@@ -1,10 +1,7 @@
 package com.dablaze.bookkeeper.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface BookDAO {
@@ -17,5 +14,11 @@ interface BookDAO {
 
     @Update
     fun update(book: Book)
+
+    @Query("SELECT * FROM books WHERE author LIKE :searchString OR bookName LIKE :searchString")
+    fun searchAllBooks(searchString: String): LiveData<List<Book>>
+
+    @Delete
+    fun delete(book:Book)
 
 }
