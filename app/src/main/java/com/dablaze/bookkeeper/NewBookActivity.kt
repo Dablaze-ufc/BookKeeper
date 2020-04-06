@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_new_book.*
 
 class NewBookActivity : AppCompatActivity() {
@@ -12,6 +13,8 @@ class NewBookActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_book)
+
+        textDate.isVisible = false
 
         buttonCancel.setOnClickListener {
             finish()

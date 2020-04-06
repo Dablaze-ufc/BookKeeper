@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dablaze.bookkeeper.database.Book
 import com.dablaze.bookkeeper.viewModel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class SearchActivity : AppCompatActivity(), BooksListAdapter.OnDeleteClickListener {
 
@@ -56,7 +57,8 @@ class SearchActivity : AppCompatActivity(), BooksListAdapter.OnDeleteClickListen
                 val authorName = bundle.getString(EditActivity.UPDATED_AUTHOR)!!
                 val bookName = bundle.getString(EditActivity.UPDATED_BOOK_NAME)!!
                 val bookDesc = bundle.getString(EditActivity.UPDATED_BOOK_DESC)!!
-                val book = Book(id, authorName, bookName,bookDesc)
+                val currentTime = Calendar.getInstance().time
+                val book = Book(id, authorName, bookName,bookDesc,currentTime)
 
                 searchViewModel.update(book)
 

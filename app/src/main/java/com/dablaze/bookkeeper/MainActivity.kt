@@ -54,7 +54,9 @@ class MainActivity : AppCompatActivity(), BooksListAdapter.OnDeleteClickListener
                 val authorName = bundle?.getString(NewBookActivity.AUTHOR_NAME)!!
                 val bookName = bundle.getString(NewBookActivity.BOOK_NAME)!!
                 val bookDescription = bundle.getString(NewBookActivity.BOOK_DESCRIPTION)!!
-                val book = Book(id,authorName,bookName, bookDescription)
+                val currentTime = Calendar.getInstance().time
+                val book = Book(id,authorName,bookName,bookDescription,currentTime)
+
 
                 bookViewModel.insert(book)
 
@@ -70,7 +72,9 @@ class MainActivity : AppCompatActivity(), BooksListAdapter.OnDeleteClickListener
                 val authorName = bundle.getString(EditActivity.UPDATED_AUTHOR)!!
                 val bookName = bundle.getString(EditActivity.UPDATED_BOOK_NAME)!!
                 val bookDesc = bundle.getString(EditActivity.UPDATED_BOOK_DESC)!!
-                val book = Book(id,authorName,bookName,bookDesc)
+
+                val currentTime = Calendar.getInstance().time
+                val book = Book(id,authorName,bookName,bookDesc,currentTime)
 
                 bookViewModel.update(book)
 

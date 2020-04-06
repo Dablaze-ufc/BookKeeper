@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dablaze.bookkeeper.database.Book
 import kotlinx.android.synthetic.main.list_item.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class BooksListAdapter(private val context:Context, private val onDeleteClickListener: OnDeleteClickListener) : RecyclerView.Adapter<BooksListAdapter.BooksListViewHolder>()  {
     interface OnDeleteClickListener{
@@ -26,8 +28,8 @@ class BooksListAdapter(private val context:Context, private val onDeleteClickLis
     override fun getItemCount(): Int = booksList.size
 
     override fun onBindViewHolder(holder: BooksListViewHolder, position: Int) {
-       var book = booksList[position]
-        holder.setData(book.author,book.bookName,position)
+       val book = booksList[position]
+        holder.setData(book.lastUpdated,book.bookName,position)
         holder.setListeners()
     }
 
@@ -39,11 +41,20 @@ class BooksListAdapter(private val context:Context, private val onDeleteClickLis
     inner class BooksListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
        private  var pos :Int = 0
 
-       fun setData(author: String, bookName: String, position: Int) {
-           itemView.textAuthor.text = author
-           itemView.textBook.text = bookName
+       fun setData(lastUpdated: Date?, bookName: String, position: Int) {
+           itemView.textAuthor.text = bookName
+           itemView.textBook.text = getFormattedDate(lastUpdated)
            this.pos = position
        }
+
+        private fun getFormattedDate(lastUpdated: Date?): CharSequence? {
+            var time = "Last Updated: "
+            time += lastUpdated?.let {
+                val simpleFormatter = SimpleDateFormat("HH:mm d MMM, yyyy", Locale.getDefault())
+                simpleFormatter.format(lastUpdated)
+            } ?: "NOT FOUND"
+            return time
+        }
 
         fun setListeners() {
             itemView.deleteButton.setOnClickListener {
@@ -57,6 +68,7 @@ class BooksListAdapter(private val context:Context, private val onDeleteClickLis
                 intent.putExtra("author_name",booksList[pos].author)
                 intent.putExtra("book_name",booksList[pos].bookName)
                 intent.putExtra("book_desc", booksList[pos].description)
+                intent.putExtra("last_updated",getFormattedDate(booksList[pos].lastUpdated))
                 (context as Activity).startActivityForResult(intent,MainActivity.UPDATE_NOTE_ACTIVITY_REQUEST_CODE)
             }
 

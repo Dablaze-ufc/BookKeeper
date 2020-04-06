@@ -57,6 +57,15 @@
             android:importantForAutofill="no"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/textDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/etBookDescription"
+        app:layout_constraintStart_toStartOf="@+id/etBookDescription"
+        app:layout_constraintTop_toBottomOf="@+id/etBookDescription" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSave"
         android:layout_width="wrap_content"
@@ -66,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonCancel"
-        app:layout_constraintTop_toBottomOf="@+id/etBookDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textDate" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonCancel"
