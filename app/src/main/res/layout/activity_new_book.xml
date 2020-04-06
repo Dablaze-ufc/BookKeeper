@@ -14,13 +14,14 @@
         android:layout_marginStart="52dp"
         android:layout_marginTop="132dp"
         android:layout_marginEnd="52dp"
-        android:hint="@string/author"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
+            android:hint="@string/author"
+            android:importantForAutofill="no"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -29,14 +30,31 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:hint="@string/book"
         app:layout_constraintEnd_toEndOf="@+id/etAuthor"
         app:layout_constraintStart_toStartOf="@+id/etAuthor"
         app:layout_constraintTop_toBottomOf="@+id/etAuthor">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:hint="@string/book"
+            android:importantForAutofill="no"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etBookDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/etBookName"
+        app:layout_constraintStart_toStartOf="@+id/etBookName"
+        app:layout_constraintTop_toBottomOf="@+id/etBookName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/description"
+            android:importantForAutofill="no"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -48,7 +66,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonCancel"
-        app:layout_constraintTop_toBottomOf="@+id/etBookName" />
+        app:layout_constraintTop_toBottomOf="@+id/etBookDescription" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonCancel"

@@ -55,7 +55,8 @@ class SearchActivity : AppCompatActivity(), BooksListAdapter.OnDeleteClickListen
                 val id = bundle?.getString(EditActivity.ID)!!
                 val authorName = bundle.getString(EditActivity.UPDATED_AUTHOR)!!
                 val bookName = bundle.getString(EditActivity.UPDATED_BOOK_NAME)!!
-                val book = Book(id, authorName, bookName)
+                val bookDesc = bundle.getString(EditActivity.UPDATED_BOOK_DESC)!!
+                val book = Book(id, authorName, bookName,bookDesc)
 
                 searchViewModel.update(book)
 

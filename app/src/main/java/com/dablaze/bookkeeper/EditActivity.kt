@@ -20,9 +20,11 @@ class EditActivity : AppCompatActivity() {
             id = bundle.getString("id")
             val author = bundle.getString("author_name")
             val book = bundle.getString("book_name")
+            val desc = bundle.getString("book_desc")
 
             etAuthor.editText?.setText( author)
             etBookName.editText?.setText(book)
+            etBookDescription.editText?.setText(desc)
         }
 
 
@@ -30,12 +32,14 @@ class EditActivity : AppCompatActivity() {
         buttonSave.setOnClickListener {
             val updatedAuthor = etAuthor.editText?.text.toString().trim()
             val updatedBookName = etBookName.editText?.text.toString().trim()
+            val updatedBookDesc = etBookDescription.editText?.text.toString().trim()
 
             val updateIntent = Intent()
 
             updateIntent.putExtra(ID,id)
             updateIntent.putExtra(UPDATED_AUTHOR, updatedAuthor)
             updateIntent.putExtra(UPDATED_BOOK_NAME,updatedBookName)
+            updateIntent.putExtra(UPDATED_BOOK_DESC,updatedBookDesc)
             setResult(Activity.RESULT_OK,updateIntent)
         finish()
         }
@@ -48,5 +52,6 @@ class EditActivity : AppCompatActivity() {
         const val ID ="id"
         const val UPDATED_AUTHOR = "author_name"
         const val UPDATED_BOOK_NAME ="book_name"
+        const val UPDATED_BOOK_DESC ="book_desc"
     }
 }

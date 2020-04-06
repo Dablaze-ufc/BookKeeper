@@ -51,11 +51,12 @@ class BooksListAdapter(private val context:Context, private val onDeleteClickLis
 
             }
 
-            itemView.editButton.setOnClickListener{
+            itemView.setOnClickListener{
                 val intent = Intent(context, EditActivity::class.java)
                 intent.putExtra("id",booksList[pos].id)
                 intent.putExtra("author_name",booksList[pos].author)
                 intent.putExtra("book_name",booksList[pos].bookName)
+                intent.putExtra("book_desc", booksList[pos].description)
                 (context as Activity).startActivityForResult(intent,MainActivity.UPDATE_NOTE_ACTIVITY_REQUEST_CODE)
             }
 

@@ -21,11 +21,13 @@ class NewBookActivity : AppCompatActivity() {
             val resultIntent = Intent()
             val author = etAuthor.editText?.text.toString().trim()
             val bookName = etBookName.editText?.text.toString().trim()
+            val bookDescription = etBookDescription.editText?.text.toString().trim()
             if (TextUtils.isEmpty(author) || TextUtils.isEmpty(bookName)){
                 setResult(Activity.RESULT_CANCELED, resultIntent)
             }else{
                 resultIntent.putExtra(AUTHOR_NAME,author)
                 resultIntent.putExtra(BOOK_NAME,bookName)
+                resultIntent.putExtra(BOOK_DESCRIPTION, bookDescription)
                 setResult(Activity.RESULT_OK,resultIntent)
                 finish()
             }
@@ -35,6 +37,7 @@ class NewBookActivity : AppCompatActivity() {
     companion object{
         const val AUTHOR_NAME = "author_name"
         const val BOOK_NAME ="book_name"
+        const val BOOK_DESCRIPTION ="book_description"
     }
 
 

@@ -53,7 +53,8 @@ class MainActivity : AppCompatActivity(), BooksListAdapter.OnDeleteClickListener
                 val id = UUID.randomUUID().toString()
                 val authorName = bundle?.getString(NewBookActivity.AUTHOR_NAME)!!
                 val bookName = bundle.getString(NewBookActivity.BOOK_NAME)!!
-                val book = Book(id,authorName,bookName)
+                val bookDescription = bundle.getString(NewBookActivity.BOOK_DESCRIPTION)!!
+                val book = Book(id,authorName,bookName, bookDescription)
 
                 bookViewModel.insert(book)
 
@@ -68,7 +69,8 @@ class MainActivity : AppCompatActivity(), BooksListAdapter.OnDeleteClickListener
                 val id = bundle?.getString(EditActivity.ID)!!
                 val authorName = bundle.getString(EditActivity.UPDATED_AUTHOR)!!
                 val bookName = bundle.getString(EditActivity.UPDATED_BOOK_NAME)!!
-                val book = Book(id,authorName,bookName)
+                val bookDesc = bundle.getString(EditActivity.UPDATED_BOOK_DESC)!!
+                val book = Book(id,authorName,bookName,bookDesc)
 
                 bookViewModel.update(book)
 

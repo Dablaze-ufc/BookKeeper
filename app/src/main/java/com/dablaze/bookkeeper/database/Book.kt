@@ -7,6 +7,5 @@ import androidx.room.PrimaryKey
 class Book(@PrimaryKey
            val id : String,
            val author:String,
-           val bookName: String) {
-
-}
+           val bookName: String,
+           val description: String)
